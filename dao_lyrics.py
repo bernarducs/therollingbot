@@ -1,10 +1,7 @@
-from time import sleep
 from itertools import zip_longest, filterfalse
-from scrape_lyrics import get_songs
-from emojis import get_emoji
 
 
-def get_lyrics(song):
+def get_verses(song):
     with open("lyrics\\{}.txt".format(song), "r") as f:
         lines = f.readlines()
         lyrics = [line.strip('\n') for line in lines]
@@ -13,7 +10,8 @@ def get_lyrics(song):
     parts = [lyrics[i:j] for i, j in zip_longest(idx, idx[1:])]
     verses = [list(filterfalse(lambda x: len(x) == 0, part)) for part in parts]
 
-    return verses
+    parsed = transform_verses(verses)
+    return parsed
 
 
 def transform_verses(verses):
@@ -31,22 +29,5 @@ def transform_verses(verses):
             parsed.append(func(first))
             parsed.append(['\n'.join(last)])
 
-    return parsed
-
-
-def print_song(song, secs=5):
-    lyrics = get_lyrics(song)
-    parsed = transform_verses(lyrics)
-
-    for items in parsed:
-        for lines in items:
-            sleep(secs)
-            print(get_emoji(), lines, get_emoji())
-
-
-def print_songs(secs=5):
-    songs = get_songs(shuffled=True)
-    for song in songs:
-        print(f"Playing {song}\n")
-        print_song(song)
-        sleep(secs)
+    parsed_clean = list(filter(None, parsed))
+    return parsed_clean
