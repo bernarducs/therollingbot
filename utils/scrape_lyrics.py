@@ -17,7 +17,7 @@ def download_songs():
 
 
 def get_songs(shuffled=False):
-    with open('songs_list\\songs.txt', 'r') as f:
+    with open('data/songs_list/songs.txt', 'r') as f:
         lines = f.readlines()
         songs = [line.strip('\n') for line in lines]
         if shuffled:
@@ -30,7 +30,7 @@ def download_lyrics(songs_list):
         print(f"Searching for {song} lyrics...")
         try:
             lyrics = lw.get_lyrics('the rolling stones', song)
-            with open(f"lyrics\\{song}.txt", 'w', encoding='utf-8') as f:
+            with open(f"data/lyrics/{song}.txt", 'w', encoding='utf-8') as f:
                 f.write(lyrics)
         except LyricsNotFound:
             print("Lyrics not found.")

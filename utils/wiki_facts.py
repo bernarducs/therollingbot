@@ -1,9 +1,7 @@
-from math import ceil
 import pandas as pd
 from wikipedia import WikipediaPage as WP
-from scrape_lyrics import get_songs
+from utils.scrape_lyrics import get_songs
 
-import spacy  # noqa
 from spacy.lang.en import English
 
 nlp = English()
@@ -36,6 +34,6 @@ def download_wiki_summary():
     for link, song in links_and_songlyrics:
         summary = WP(link).summary
         doc = nlp(summary)
-        with open(f"wiki\\summary\\{song}.txt", 'w', encoding='utf-8') as f:
+        with open(f"../data/wiki/summary/{song}.txt", 'w', encoding='utf-8') as f:
             for sent in doc.sents:
                 f.write(f"{sent.text.strip()}\n")

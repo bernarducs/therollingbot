@@ -13,7 +13,7 @@ def get_spotify_url(song):
 
 
 def check_url_exists(song):
-    url_folder = os.path.join(os.getcwd(), 'spotify_song_url')
+    url_folder = os.path.join(os.getcwd(), 'data/spotify_song_url')
     files = os.listdir(url_folder)
     url_files = [file.split('.')[0] for file in files]
     if song in url_files:
