@@ -1,4 +1,4 @@
-def get_wiki_song(song):
+def wiki_song(song):
     path = "data/wiki/summary/{}.txt".format(song)
     try:
         with open(path, "r", encoding='latin-1') as f:

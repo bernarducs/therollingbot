@@ -2,7 +2,7 @@ import os
 import random
 
 
-def get_spotify_url(song):
+def spotify_url_song(song):
     song_path = check_url_exists(song)
     if song_path:
         with open(song_path, 'r') as f:
