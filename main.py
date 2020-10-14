@@ -13,9 +13,10 @@ while True:
 
     verse, song, new_song, last_verse = current_song_and_verse()
     if new_song:
-        intro_txt = f"Today we'going to play {song}! Check it out! 👅"
+        intro_txt = f"Today we'going to play {song}! Check it out! 👅 #rollingstones"
         print(intro_txt)
         api.update_status(intro_txt)
+        sleep(60 * 60)
 
     verse_txt = f"{verse} {get_emoji()}"
     print(verse_txt)
@@ -38,10 +39,12 @@ while True:
 
         spotify = spotify_url_song(song)
         if spotify:
-            print(spotify)
-            api.update_status(spotify)
+            spfy_txt = f"{spotify} #rollingstones"
+            print(spfy_txt)
+            api.update_status(spfy_txt)
             sleep(60 * 60 * 3)
 
     name_album, path_album = album_of_day()
     if name_album:
         api.update_with_media(path_album, f"{name_album} {'💽💿📀'}")
+        sleep(60 * 60)
