@@ -1,6 +1,8 @@
 from time import sleep
+
 import tweepy
 from twitter_api.twitter_api import conn
+
 from dao.dao_lyrics import current_song_and_verse
 from dao.dao_wiki import wiki_song
 from dao.dao_spotify import spotify_url_song
@@ -46,5 +48,6 @@ while True:
 
     name_album, path_album = album_of_day()
     if name_album:
+        print(name_album, path_album)
         api.update_with_media(path_album, f"{name_album} {'💽💿📀'}")
         sleep(60 * 60)
