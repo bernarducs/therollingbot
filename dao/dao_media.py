@@ -1,6 +1,7 @@
 import os
 from random import choice
-from datetime import datetime
+from datetime import datetime as dt
+import pandas as pd
 
 
 def get_album_path(album):
@@ -16,15 +17,13 @@ def get_random_album():
 
 
 def album_of_day():
-    """
-    check if 12am, so send path and name from random album
-    by each 5 days
-    :return: str, str
-    """
-    hour = datetime.now().hour
-    day_five = datetime.now().day % 5
+    df = pd.read_csv('data/albums_list/albums.csv', sep=";")
 
-    if hour == 23 and day_five == 0:
-        return get_random_album()
-    else:
-        return [], []
+    # today, only month and day
+    today = dt.strftime(dt.today(), "%m-%d")
+    df_album = df.query("month_day == @today").head(1)
+
+    album = df_album.album.iloc[0]
+    path = df_album.path.iloc[0]
+
+    return album, path

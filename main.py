@@ -15,7 +15,8 @@ while True:
 
     verse, song, new_song, last_verse = current_song_and_verse()
     if new_song:
-        intro_txt = f"Today we'going to play {song}! Check it out! 👅 #rollingstones"
+        intro_txt = f"Today we're going to play {song}! \n" \
+                    f"Check it out! 👅 #rollingstones"
         print(intro_txt)
         api.update_status(intro_txt)
         sleep(60 * 60)
@@ -49,5 +50,7 @@ while True:
     name_album, path_album = album_of_day()
     if name_album:
         print(name_album, path_album)
-        api.update_with_media(path_album, f"{name_album} {'💽💿📀'}")
+        api.update_with_media(path_album,
+                              f"Album of the day 📀 {name_album} "
+                              f"#rollingstones")
         sleep(60 * 60)
