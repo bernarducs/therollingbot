@@ -45,12 +45,12 @@ while True:
             spfy_txt = f"{spotify} #rollingstones"
             print(spfy_txt)
             api.update_status(spfy_txt)
-            sleep(60 * 60 * 3)
+            sleep(60 * 60)
 
-    name_album, path_album = album_of_day()
-    if name_album:
-        print(name_album, path_album)
-        api.update_with_media(path_album,
-                              f"Album of the day 📀 {name_album} "
-                              f"#rollingstones")
-        sleep(60 * 60)
+        name_album, path_album = album_of_day()
+        if name_album:
+            print(name_album, path_album)
+            api.update_with_media(path_album,
+                                  f"Album of the day 📀 {name_album} "
+                                  f"#rollingstones")
+            sleep(60 * 60 * 3)
