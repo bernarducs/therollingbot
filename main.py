@@ -21,13 +21,14 @@ while True:
         api.update_status(intro_txt)
         sleep(60 * 60)
 
-    verse_txt = f"{verse} {get_emoji()}"
-    print(verse_txt)
-    try:
-        api.update_status(verse_txt)
-    except tweepy.error.TweepError as e:
-        print(e)
-    sleep(60 * 60 * 3)
+    if verse:
+        verse_txt = f"{verse} {get_emoji()}"
+        print(verse_txt)
+        try:
+            api.update_status(verse_txt)
+        except tweepy.error.TweepError as e:
+            print(e)
+        sleep(60 * 60 * 3)
 
     if last_verse:
         wiki = wiki_song(song)

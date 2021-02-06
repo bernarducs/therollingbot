@@ -25,7 +25,7 @@ def current_song_and_verse():
         song = choose_a_song()
         verses = get_verses(song)
         verse_number = 0
-        verse = verses[verse_number]
+        verse = None
         return verse, song, first_verse, last_verse
     finally:
         dic = {'song': song, 'verse_number': verse_number}
