@@ -5,7 +5,7 @@ import random
 def spotify_url_song(song):
     song_path = check_url_exists(song)
     if song_path:
-        with open(song_path, 'r') as f:
+        with open(song_path, 'r', encoding='latin-1') as f:
             url_list = [line.strip('\n').split(';')
                         for line in f.readlines()]
         text = show_spotify_links(url_list)
