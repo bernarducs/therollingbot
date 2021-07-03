@@ -8,7 +8,7 @@ def get_gif_path(gif):
     return f"data/gifs/{gif}"
 
 
-def it_wednesday():
+def its_tuesday():
     gifs = ['charlie_watts.gif', 'keith_hat.gif', 'mick_keith_arm.gif',
             'ronnie_serious.gif', 'mick_surprised.gif', 'charlie_cigar.gif',
             'mick_what.gif', 'keith_why.gif', 'keef_eyes.gif',
