@@ -21,4 +21,4 @@ def its_tuesday():
     member_name = picked.split('_')[0].capitalize()
     txt = f"What a week, huh?\n{member_name}, " \
           f"it's ruby Tuesday\n\n#rollingstones"
-    return api.update_with_media(file_path, txt)
+    return api.update_status_with_media(status=txt, filename=file_path)
