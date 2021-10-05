@@ -6,8 +6,11 @@ from twitter_api.twitter_api import conn
 from dao.dao_lyrics import current_song_and_verse
 from dao.dao_wiki import wiki_song
 from dao.dao_spotify import spotify_url_song
-from dao.dao_media import album_of_day
+from dao.dao_images import album_of_day
+from dao.dao_videos import video_song
+
 from utils.emojis import get_emoji
+
 
 api = conn()
 
@@ -48,10 +51,16 @@ while True:
             api.update_status(spfy_txt)
             sleep(60 * 60)
 
+        name_video = video_song(song)
+        if name_video:
+            api.update_status(status=f"{song} #rollingstones",
+                              media_ids=[name_video.media_id])
+        sleep(60 * 60)
+
         name_album, path_album = album_of_day()
         if name_album:
             print(name_album, path_album)
-            api.update_with_media(path_album,
-                                  f"Album of the day 📀 {name_album} "
-                                  f"#rollingstones")
+            api.update_status_with_media(status=f"Album of the day 📀 "
+                                                f"{name_album} #rollingstones",
+                                         filename=path_album)
             sleep(60 * 60 * 3)
