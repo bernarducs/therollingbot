@@ -71,25 +71,28 @@ def video_song(song_name):
         return False
 
     yt = YouTube(link)
-    name_video = "clip.mp4"
+    input_video = "data/videos/clip.mp4"
+    output_video = "data/videos/clip2.mp4"
 
     # download the vid
     try:
         yt.streams.filter(progressive=True,
                           res='360p',
                           file_extension='mp4').first().download(
-            filename=name_video)
+            filename=input_video)
 
         # cut the vid, add fade in and out, the save it
-        clip = VideoFileClip(name_video).subclip(5, 35)
+        clip = VideoFileClip(input_video).subclip(10, 55)
         # clip = clip.resize(480, 360)
-        clip = fadein(clip, duration=1)
+        clip = fadein(clip, duration=2)
+        clip = audio_fadein(clip, duration=2)
         clip = fadeout(clip, duration=5)
-        clip = audio_fadein(clip, duration=1)
         clip = audio_fadeout(clip, duration=5)
-        clip.write_videofile(name_video, codec="libx264", audio_codec="aac")
+        clip.write_videofile(output_video,
+                             codec="libx264",
+                             audio_codec="aac")
 
-        media = api.media_upload(filename=name_video,
+        media = api.media_upload(filename=output_video,
                                  media_category="tweet_video")
         return media
     except AttributeError as e:
