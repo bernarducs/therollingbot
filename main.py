@@ -11,7 +11,6 @@ from dao.dao_videos import video_song
 
 from utils.emojis import get_emoji
 
-
 api = conn()
 
 while True:
@@ -52,10 +51,15 @@ while True:
             api.update_status(spfy_txt)
             sleep(60 * 60)
 
-        name_video = video_song(song)
-        if name_video:
-            api.update_status(status=f"{song} #rollingstones",
-                              media_ids=[name_video.media_id])
+        video = video_song(song)
+        if video:
+            media_id = video["media"].media_id
+            media_yt_link = video["link"]
+            vid_twt = api.update_status(status=f"{song} #rollingstones",
+                                        media_ids=[media_id])
+            api.update_status(status=f"watch full video "
+                                     f"in youtube {media_yt_link}",
+                              in_reply_to_status_id=vid_twt.id)
         sleep(60 * 60)
 
         name_album, path_album = album_of_day()

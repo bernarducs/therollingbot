@@ -62,10 +62,8 @@ def video_song(song_name):
     searches = find_three_links(f"the rolling stones {song_name}")
     for search in searches:
         if search[2] in ['The Rolling Stones', 'ABKCOVEVO']:
-            link = search[1]
             break
-        else:
-            link = search[1]
+    link = search[1]
 
     if not link:
         return False
@@ -94,6 +92,6 @@ def video_song(song_name):
 
         media = api.media_upload(filename=output_video,
                                  media_category="tweet_video")
-        return media
+        return {"media": media, "link": link}
     except AttributeError as e:
         print(e)
