@@ -7,7 +7,7 @@ from dao.dao_lyrics import song_and_verse
 from dao.dao_wiki import wiki_song
 from dao.dao_spotify import spotify_url_song
 from dao.dao_images import album_of_day
-from dao.dao_videos import video_song
+from dao.dao_videos import post_video_song
 
 from utils.emojis import get_emoji
 
@@ -51,15 +51,7 @@ while True:
             api.update_status(spfy_txt)
             sleep(60 * 60)
 
-        video = video_song(song)
-        if video:
-            media_id = video["media"].media_id
-            media_yt_link = video["link"]
-            vid_twt = api.update_status(status=f"{song} #rollingstones",
-                                        media_ids=[media_id])
-            api.update_status(status=f"watch full video "
-                                     f"in youtube {media_yt_link}",
-                              in_reply_to_status_id=vid_twt.id)
+        post_video_song(song)
         sleep(60 * 60)
 
         name_album, path_album = album_of_day()

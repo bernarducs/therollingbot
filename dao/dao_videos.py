@@ -94,4 +94,16 @@ def video_song(song_name):
                                  media_category="tweet_video")
         return {"media": media, "link": link}
     except AttributeError as e:
-        print(e)
+        print(f"Error: {e}")
+
+
+def post_video_song(song_name):
+    video = video_song(song_name)
+    if video:
+        media_id = video["media"].media_id
+        media_yt_link = video["link"]
+        vid_twt = api.update_status(status=f"{song_name} #rollingstones",
+                                    media_ids=[media_id])
+        api.update_status(status=f"watch full video "
+                                 f"in youtube {media_yt_link}",
+                          in_reply_to_status_id=vid_twt.id)
