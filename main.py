@@ -28,7 +28,7 @@ while True:
         print(verse_txt)
         try:
             api.update_status(verse_txt)
-        except tweepy.error.TweepError as e:
+        except tweepy.errors.TweepyException as e:
             print(e)
         sleep(60 * 60 * 3)
 
