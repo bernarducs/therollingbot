@@ -1,5 +1,6 @@
-from itertools import zip_longest, filterfalse
 from ast import literal_eval
+from itertools import filterfalse, zip_longest
+
 from utils.scrape_lyrics import get_songs
 
 FILE_PATH = 'log/log.txt'
@@ -17,10 +18,10 @@ def read_log():
 
 def write_log(song, verse_number, last_verse):
     """
-        writes a log with a song, verse number and
-        if it is last verse
-        :return: str, int, bool
-        """
+    writes a log with a song, verse number and
+    if it is last verse
+    :return: str, int, bool
+    """
     if last_verse:
         song = pick_a_song()
         verse_number = 0
@@ -99,7 +100,7 @@ def get_verses(song):
     :param song:
     :return: list
     """
-    with open("data/lyrics/{}.txt".format(song), "r") as f:
+    with open('data/lyrics/{}.txt'.format(song), 'r') as f:
         lines = f.readlines()
         lyrics = [line.strip('\n') for line in lines]
 
@@ -120,7 +121,7 @@ def transform_verses(verses):
     parsed = list()
 
     def func(v):
-        return ['\n'.join(v[i:i + 2]) for i in range(0, len(v), 2)]
+        return ['\n'.join(v[i : i + 2]) for i in range(0, len(v), 2)]
 
     for verse in verses:
         n_items = len(verse)

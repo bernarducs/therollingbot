@@ -1,19 +1,17 @@
 import re
 from random import shuffle
 
-import requests
-
 import lyricwikia as lw
-from lyricwikia import LyricsNotFound
+import requests
 
 
 def download_songs():
-    r = requests.get("https://lyrics.fandom.com/wiki/The_Rolling_Stones")
+    r = requests.get('https://lyrics.fandom.com/wiki/The_Rolling_Stones')
     songs = re.findall(r'title=\"The Rolling Stones:([\s\w]+)\"\>', r.text)
     # write file
-    with open("songs.txt", 'r', encoding="utf-8") as f:
+    with open('songs.txt', 'r', encoding='utf-8') as f:
         for song in songs:
-            f.write(f"{song}\n")
+            f.write(f'{song}\n')
 
 
 def get_songs(shuffled=False):
@@ -27,10 +25,10 @@ def get_songs(shuffled=False):
 
 def download_lyrics(songs_list):
     for song in songs_list:
-        print(f"Searching for {song} lyrics...")
+        print(f'Searching for {song} lyrics...')
         try:
             lyrics = lw.get_lyrics('the rolling stones', song)
-            with open(f"data/lyrics/{song}.txt", 'w', encoding='utf-8') as f:
+            with open(f'data/lyrics/{song}.txt', 'w', encoding='utf-8') as f:
                 f.write(lyrics)
-        except LyricsNotFound:
-            print("Lyrics not found.")
+        except lw.LyricsNotFound:
+            print('Lyrics not found.')
