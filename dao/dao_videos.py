@@ -97,6 +97,8 @@ def video_song(song_name):
         print(f'Error: {e}')
     except pytube.exceptions.RegexMatchError as e:
         print(f'Error: {e}')
+    except:
+        print('Erro não identificado.')
 
 
 def post_video_song(song_name):
